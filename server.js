@@ -49,12 +49,10 @@ const data = {
                 }
             }
 
-
-
-/* app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     console.log('hellO?')
     res.sendFile(__dirname + '/yarn-client/dist/index.html');
-}); */
+}); 
 app.get('/vue', (req, res) => {
     res.sendFile(__dirname + '/yarn-client/dist/index.html');
 });

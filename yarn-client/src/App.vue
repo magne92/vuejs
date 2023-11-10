@@ -22,7 +22,12 @@
                  <p>Fasthet: {{ activeYarn.thickness }}</p>
                  <p>Merke: {{ activeYarn.brand }}</p>
              </div>
-             <div class="yarn_entities_active"><span v-for=" ent in activeYarn.entities" :key="ent.id">{{ ent.color}} {{ ent.amount}}</span></div>
+             <div class="yarn_entities_active"><div class='yarn_entity_edit' v-for=" ent in activeYarn.entities" > 
+                <div @click="editYarn_dec(ent)"> - </div> 
+                <div>{{ ent.color}} {{ ent.amount}} </div> 
+                <div @click="editYarn_inc(ent)">+</div>
+            </div>
+        </div>
          </div>
          <!-- <div class="newYarn" v-if="viewNewYarn">
              <p>{{this.message}}</p>
@@ -82,6 +87,22 @@ fetchData() {
             })
         },
 
+editYarn_inc(ent){
+    ent.amount++
+    console.log(ent)
+    console.log("entities:",this.activeYarn.entities)
+    console.log(this.activeYarn.entities.indexOf(ent))
+},
+editYarn_dec(ent){
+    
+    ent.amount--
+    if (ent.amount < 0){
+        ent.amount = 0
+    }
+    console.log(ent)
+    console.log("entities:",this.activeYarn.entities)
+    console.log(this.activeYarn.entities.indexOf(ent))
+},
 
 return_to_viewAllYarn(){
     this.viewAllYarn = true  
@@ -151,5 +172,25 @@ mounted: function() {
 
 
 <style scoped>
+
+.yarn_entity_edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    box-shadow: 1px 3px 5px black;
+    padding: 1vh;
+    margin: 1vh;
+    width: 15vh;
+    font-size: 3vh;
+    text-align: center;
+}
+
+.yarn_entities_active {
+    display: flex;
+    flex-direction: column;
+    padding: 2vh;
+    flex-wrap: wrap;
+    align-items: center;
+}
 
 </style>
