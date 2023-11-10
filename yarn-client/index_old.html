@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Vue.js App Root -->
+    <div id="app">
+        <h1>GARN</h1>
+        <button v-if="!viewAllYarn" @click="return_to_viewAllYarn">Tilbake</button>
+        <button v-if="!viewNewYarn" @click="newYarn">Nytt garn</button>
+        <div v-if="viewAllYarn" id="yarn_content">
+            <div @click="changeYarn(yarn.id)" class="yarn" v-if='contentLoaded' v-for="yarn in yarn_data" :key='yarn.id'>
+                <div class="yarn_title" >
+                    <p>{{yarn.type}}</p>
+                    <p>Pinne: {{ yarn.stick }}</p>
+                    <p>Fasthet: {{ yarn.thickness }}</p>
+                    <p>Merke: {{ yarn.brand }}</p>
+                </div>
+                <div class="yarn_entities"><span v-for=" ent in yarn.entities" :key="ent.id">{{ ent.color}} {{ ent.amount}}</span></div>
+            </div> 
+        </div>
+        <div class="activeYarn" v-if="viewEditYarn">
+            <div class="yarn_title_active" >
+                <p>{{activeYarn.type}}</p>
+                <p>Pinne: {{ activeYarn.stick }}</p>
+                <p>Fasthet: {{ activeYarn.thickness }}</p>
+                <p>Merke: {{ activeYarn.brand }}</p>
+            </div>
+            <div class="yarn_entities_active"><span v-for=" ent in activeYarn.entities" :key="ent.id">{{ ent.color}} {{ ent.amount}}</span></div>
+        </div>
+        <!-- <div class="newYarn" v-if="viewNewYarn">
+            <p>{{this.message}}</p>
+            <label for="type">Type</label>
+            <input type="text" v-model="typeValue" name="type"><br>
+            <label for="stick">Pinne</label>
+            <input type="number" v-model="stickValue" name="stick"><br>
+            <label for="thickness">Fasthet</label>
+            <input type="number" v-model="thicknessValue" name="thickness"><br>
+            <label for="brand">Merke</label>
+            <input type="text" v-model="brandValue" name="brand"><br>
+            <button @click="addYarn()">Legg til</button>
+        </div> -->
+        <new-yarn></new-yarn> 
+    </div>
+
+    <!-- Your Vue.js Script -->
+    <script type="module" src="src/main.js"></script>
+
+</body>
+</html>
